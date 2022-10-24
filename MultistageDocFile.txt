@@ -7,7 +7,7 @@ WORKDIR /app
 RUN git clone https://github.com/femiog/maven-web-application
 
 #Maven
-FROM maven: 3.6.3-jdk-11-alpine as build
+FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app
 COPY --from=repo /app/maven-web-application  /app
 RUN mvn install
@@ -16,3 +16,4 @@ RUN mvn install
 FROM tomcat:8.0.20-jre8
 #COPY  /app/target/*war /usr/local/tomcat/webapps/maven-web-app.war
 COPY --from=build /app/target/*war /usr/local/tomcat/webapps/
+
